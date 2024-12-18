@@ -1,0 +1,11 @@
+spring:
+  flyway:
+    user: sa
+    password:
+    url: jdbc:h2:mem:/chor;MODE=PostgreSQL;DATABASE_TO_LOWER=true;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    schemas: public
+
+  r2dbc:
+    url: r2dbc:h2:mem:////chor;MODE=PostgreSQL
+    username: sa
+    password:

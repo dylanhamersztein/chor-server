@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: chor-server
+
+  flyway:
+    enabled: true
+    user: chor-server
+    password: ${CHOR_DB_PASSWORD}
+    url: jdbc:postgresql://localhost:5432/chor
+
+  r2dbc:
+    username: chor-server
+    password: ${CHOR_DB_PASSWORD}
+    url: r2dbc:postgresql://localhost:5432/chor
