@@ -13,10 +13,11 @@ class UserService(private val userRepository: UserRepository) {
     suspend fun getUser(userId: UUID) = userRepository.findById(userId)?.toUser() ?: throw UserNotFoundException(userId)
 
     suspend fun updateUserActive(userId: UUID, active: Boolean): User {
-        val user = getUser(userId)
-        val inactiveUser = user.copy(active = active)
+        if (!userExists(userId)) {
+            throw UserNotFoundException(userId)
+        }
 
-        return userRepository.save(inactiveUser.toEntity()).toUser()
+        return userRepository.updateUserActive(userId, active).toUser()
     }
 
     suspend fun updateUser(userId: UUID, updateUserRequest: UpdateUserRequest): User {
@@ -36,4 +37,6 @@ class UserService(private val userRepository: UserRepository) {
 
         return userRepository.save(updatedUser.toEntity()).toUser()
     }
+
+    private suspend fun userExists(userId: UUID) = userRepository.existsById(userId)
 }
