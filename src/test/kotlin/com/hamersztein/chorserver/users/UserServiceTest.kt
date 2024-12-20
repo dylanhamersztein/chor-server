@@ -56,17 +56,16 @@ class UserServiceTest {
     @ValueSource(booleans = [true, false])
     @ParameterizedTest(name = "should update user with active = {0}")
     fun `should update user active status`(active: Boolean) = runBlocking {
-        coEvery { userRepository.findById(any()) } returns user.toEntity()
+        coEvery { userRepository.existsById(user.id!!) } returns true
 
         val inactiveUser = user.copy(active = active)
 
-        coEvery { userRepository.save(inactiveUser.toEntity()) } returns inactiveUser.toEntity()
+        coEvery { userRepository.updateUserActive(inactiveUser.id!!, active) } returns inactiveUser.toEntity()
 
         val updatedUser = userService.updateUserActive(user.id!!, active)
 
-        coVerifyOrder {
-            userRepository.findById(user.id!!)
-            userRepository.save(inactiveUser.toEntity())
+        coVerify(exactly = 1) {
+            userRepository.updateUserActive(user.id!!, active)
         }
         assertEquals(inactiveUser, updatedUser)
     }
@@ -75,13 +74,13 @@ class UserServiceTest {
     fun `should throw user not found exception when updating user active that doesn't exist`() = runBlocking {
         val userId = UUID.randomUUID()
 
-        coEvery { userRepository.findById(any()) } returns null
+        coEvery { userRepository.existsById(any()) } returns false
 
         val exception = assertThrows<UserNotFoundException> {
             userService.updateUserActive(userId, false)
         }
 
-        coVerify(exactly = 1) { userRepository.findById(userId) }
+        coVerify(exactly = 1) { userRepository.existsById(userId) }
         assertEquals(exception.message, "User with id [$userId] not found")
     }
 
