@@ -1,4 +1,4 @@
-package com.hamersztein.chorserver.users.repository
+package com.hamersztein.chorserver.users.model
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Column
@@ -6,7 +6,7 @@ import org.springframework.data.relational.core.mapping.Table
 import java.util.*
 
 @Table("users")
-data class User(
+data class UserEntity(
     @Id val id: UUID? = null,
     val firstName: String,
     val middleNames: String? = null,
@@ -17,4 +17,17 @@ data class User(
     val city: String? = null,
     val postCode: String,
     val active: Boolean = true,
+)
+
+fun UserEntity.toUser() = User(
+    id = id,
+    firstName = firstName,
+    middleNames = middleNames,
+    lastName = lastName,
+    addressLine1 = addressLine1,
+    addressLine2 = addressLine2,
+    town = town,
+    city = city,
+    postCode = postCode,
+    active = active,
 )
