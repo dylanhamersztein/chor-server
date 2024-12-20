@@ -1,5 +1,6 @@
-package com.hamersztein.chorserver.users.repository
+package com.hamersztein.chorserver.users
 
+import com.hamersztein.chorserver.users.model.UserEntity
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -17,7 +18,7 @@ class UserRepositoryTest {
     fun `should save and find by ID`() {
         runBlocking {
             val expectedUser = userRepository.save(
-                User(
+                UserEntity(
                     firstName = "Dylan",
                     lastName = "Turmeric",
                     addressLine1 = "10 Sausage Way",
