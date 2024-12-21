@@ -1,6 +1,11 @@
 package com.hamersztein.chorserver.users
 
-import com.hamersztein.chorserver.users.model.*
+import com.hamersztein.chorserver.users.model.CannotUpdateInactiveUserException
+import com.hamersztein.chorserver.users.model.UpdateUserRequest
+import com.hamersztein.chorserver.users.model.User
+import com.hamersztein.chorserver.users.model.UserNotFoundException
+import com.hamersztein.chorserver.users.model.toEntity
+import com.hamersztein.chorserver.users.model.toUser
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.util.*
@@ -23,8 +28,7 @@ class UserService(private val userRepository: UserRepository) {
     suspend fun updateUser(userId: UUID, updateUserRequest: UpdateUserRequest): User {
         val user = getUser(userId).takeIf { it.active } ?: throw CannotUpdateInactiveUserException(userId)
 
-        val updatedUser = User(
-            id = userId,
+        val updatedUser = user.copy(
             firstName = updateUserRequest.firstName ?: user.firstName,
             middleNames = updateUserRequest.middleNames ?: user.middleNames,
             lastName = updateUserRequest.lastName ?: user.lastName,
