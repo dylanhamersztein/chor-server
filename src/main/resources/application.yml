@@ -2,6 +2,10 @@ spring:
   application:
     name: chor-server
 
+  mvc:
+    problemdetails:
+      enabled: true
+
   flyway:
     enabled: true
     user: chor-server
@@ -12,3 +16,7 @@ spring:
     username: chor-server
     password: ${CHOR_DB_PASSWORD}
     url: r2dbc:postgresql://localhost:5432/chor
+
+springdoc:
+  swagger-ui:
+    path: /api-docs.html
