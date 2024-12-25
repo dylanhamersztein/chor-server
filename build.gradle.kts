@@ -37,6 +37,8 @@ dependencies {
     implementation("org.flywaydb:flyway-core")
     implementation("org.flywaydb:flyway-database-postgresql")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("org.locationtech.jts:jts-core:1.20.0")
+    implementation("org.n52.jackson:jackson-datatype-jts:1.2.10")
 
     developmentOnly("org.springframework.boot:spring-boot-devtools")
 
