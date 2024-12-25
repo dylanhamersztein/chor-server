@@ -1,14 +1,14 @@
 package com.hamersztein.chorserver.users
 
+import com.hamersztein.chorserver.infrastructure.RepositoryTest
 import com.hamersztein.chorserver.users.model.UserEntity
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.data.r2dbc.DataR2dbcTest
 import kotlin.test.assertNotNull
 
-@DataR2dbcTest
+@RepositoryTest
 class UserRepositoryTest {
 
     @Autowired
