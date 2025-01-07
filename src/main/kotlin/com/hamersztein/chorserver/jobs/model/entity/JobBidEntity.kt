@@ -1,5 +1,6 @@
-package com.hamersztein.chorserver.jobs.model
+package com.hamersztein.chorserver.jobs.model.entity
 
+import com.hamersztein.chorserver.jobs.model.domain.JobBid
 import org.springframework.data.annotation.Id
 import org.springframework.data.annotation.ReadOnlyProperty
 import org.springframework.data.relational.core.mapping.Table
@@ -16,4 +17,12 @@ data class JobBidEntity(
     val price: BigDecimal,
     @ReadOnlyProperty
     val createdTime: OffsetDateTime? = null,
+)
+
+fun JobBidEntity.toDomain() = JobBid(
+    id = id,
+    jobRequestId = jobRequestId,
+    cleanerId = cleanerId,
+    price = price,
+    createdTime = createdTime,
 )
