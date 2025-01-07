@@ -1,7 +1,7 @@
 package com.hamersztein.chorserver.jobs
 
 import com.hamersztein.chorserver.infrastructure.RepositoryTest
-import com.hamersztein.chorserver.jobs.model.JobEntity
+import com.hamersztein.chorserver.jobs.model.entity.JobEntity
 import com.hamersztein.chorserver.users.UserRepository
 import com.hamersztein.chorserver.users.model.UserEntity
 import kotlinx.coroutines.runBlocking
