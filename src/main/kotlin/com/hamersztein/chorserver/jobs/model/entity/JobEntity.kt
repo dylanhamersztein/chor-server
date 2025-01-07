@@ -1,5 +1,6 @@
-package com.hamersztein.chorserver.jobs.model
+package com.hamersztein.chorserver.jobs.model.entity
 
+import com.hamersztein.chorserver.jobs.model.domain.Job
 import org.locationtech.jts.geom.Point
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Table
@@ -17,4 +18,14 @@ data class JobEntity(
     val jobDetails: String?,
     val customerId: UUID,
     val cleanerId: UUID
+)
+
+fun JobEntity.toDomain() = Job(
+    id = id,
+    location = location,
+    startTime = startTime,
+    duration = duration,
+    jobDetails = jobDetails,
+    customerId = customerId,
+    cleanerId = cleanerId
 )
